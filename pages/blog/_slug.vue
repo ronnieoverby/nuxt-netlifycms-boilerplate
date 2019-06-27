@@ -4,10 +4,12 @@
     <p class="date">Posted by {{author}} on {{date}}</p>
     <div class="body" v-html="$md.render(body)"/>
     <p class="back"><a class="back-link" @click="$router.back()">Back</a></p>
+    <CommentForm :post="post"/>
   </div>
 </template>
 
 <script>
+import CommentForm from '~/components/CommentForm';
 export default {
   async asyncData({ params, app, payload, route, store }) {
     /*
@@ -24,7 +26,11 @@ export default {
       body: post.body,
       title: post.title,
       author: post.author,
+      post: params.slug,
     };
+  },
+  components: {
+    CommentForm,
   }
 }
 </script>
